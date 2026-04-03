@@ -1,5 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
+        // ... другие плагины
+    id("com.google.devtools.ksp") // ДОЛЖНО БЫТЬ ЭТО
 }
 
 android {
@@ -45,4 +47,12 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+implementation(libs.gson)
+
+    implementation(libs.mpandroidchart)
+    implementation(libs.philjay.mpandroidchart)
+    implementation(libs.androidx.room.ktx)
+    implementation(libs.androidx.room.runtime)
+    ksp(libs.androidx.room.compiler)
 }
