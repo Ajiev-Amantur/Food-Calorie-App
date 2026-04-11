@@ -1,33 +1,21 @@
 package com.example.calories.presentation
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.SearchView
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.room.Database
-import com.example.calories.R
 import com.example.calories.data.Food
 import com.example.calories.data.FoodDataBase
-import com.example.calories.data.cal1
-import com.example.calories.data.carbs
-import com.example.calories.data.fats
-import com.example.calories.data.proteins
 import com.example.calories.data.repository.FoodRepositoryImpl
 import com.example.calories.databinding.ActivityFoodAddBinding
-import com.google.android.material.animation.AnimatableView
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
-import kotlinx.coroutines.delay
+import com.example.calories.domain.FoodUseCase.FoodUseCase
+import com.example.calories.presentation.adapter.FoodAdapter
 import kotlinx.coroutines.launch
-import java.util.Locale.filter
 
 class FoodAddActivity : AppCompatActivity() {
 
@@ -55,10 +43,10 @@ class FoodAddActivity : AppCompatActivity() {
             intent.putExtra("Selected_Date", selectedDate)
             intent.putExtra("food_name", it.name)
             intent.putExtra("kcal", it.calories)
-            intent.putExtra("decs",it.description)
-            intent.putExtra("carbs",it.carbs)
-            intent.putExtra("fat",it.fat)
-            intent.putExtra("protein",it.protein)
+            intent.putExtra("decs", it.description)
+            intent.putExtra("carbs", it.carbs)
+            intent.putExtra("fat", it.fat)
+            intent.putExtra("protein", it.protein)
             startActivity(intent)
 
         })
@@ -67,15 +55,17 @@ class FoodAddActivity : AppCompatActivity() {
         binding.RecyclerView.adapter = foodAdapter
 
         val repository = FoodRepositoryImpl(this)
+        val foodUseCase = FoodUseCase(repository)
         lifecycleScope.launch {
             try {
                 binding.progressbar.visibility = View.VISIBLE
                 binding.RecyclerView.visibility = View.GONE
-                val foodLoad = repository.getAllFood()
-                FoodList = foodLoad
+                //val foodLoad = repository.getAllFood()
+                val food = foodUseCase.getAllFoods()
+                FoodList = food
 
 
-                foodAdapter.updateData(foodLoad)
+                foodAdapter.updateData(food)
 
 
                 binding.RecyclerView.visibility = View.VISIBLE

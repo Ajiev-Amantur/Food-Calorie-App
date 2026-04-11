@@ -12,11 +12,12 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.calories.DetailProgressActivity
+import com.example.calories.presentation.DetailProgressActivity
 import com.example.calories.R
 import com.example.calories.data.Food
 import com.example.calories.data.FoodDataBase
 import com.example.calories.databinding.ActivityMainBinding
+import com.example.calories.presentation.adapter.FoodSelectedAdapter
 import com.google.android.material.datepicker.MaterialDatePicker
 import kotlinx.coroutines.launch
 import java.util.Date

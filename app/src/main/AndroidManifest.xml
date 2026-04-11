@@ -12,19 +12,22 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Calories">
         <activity
+            android:name=".SettingsActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.MainActivity"
             android:exported="false" />
         <activity
             android:name=".presentation.SettingsFoodActivity"
             android:exported="false" />
         <activity
-            android:name=".DetailProgressActivity"
+            android:name=".presentation.DetailProgressActivity"
             android:exported="false" />
         <activity
             android:name=".presentation.FoodAddActivity"
             android:exported="false" />
         <activity
-            android:name=".WeightSetupActivtiy"
+            android:name=".presentation.WeightSetupActivtiy"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

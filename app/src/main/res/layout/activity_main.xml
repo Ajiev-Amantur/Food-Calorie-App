@@ -419,6 +419,12 @@
                 android:layout_height="30dp"
                 android:layout_weight="1"
                 android:src="@drawable/ic_food"/>
+            <ImageView
+                android:id="@+id/navigation_settings"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:src="@drawable/ic_food"/>
         </LinearLayout>
     </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

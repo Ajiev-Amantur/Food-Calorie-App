@@ -1,20 +1,19 @@
-package com.example.calories
+package com.example.calories.presentation
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.edit
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
+import com.example.calories.R
 import com.example.calories.databinding.ActivityWeightSetupActivtiyBinding
-import com.example.calories.presentation.MainActivity
-import com.example.calories.presentation.WeightSetupAdapter
-import androidx.core.content.edit
+import com.example.calories.presentation.adapter.WeightSetupAdapter
 
 class WeightSetupActivtiy : AppCompatActivity() {
     private var isSelectingGoal = true // Сначала выбираем цель, потом активность
@@ -22,7 +21,7 @@ class WeightSetupActivtiy : AppCompatActivity() {
     private lateinit var adapter: WeightSetupAdapter
     private lateinit var binding: ActivityWeightSetupActivtiyBinding
     override fun onCreate(savedInstanceState: Bundle?) {
-        val prefs = getSharedPreferences("UserData", Context.MODE_PRIVATE)
+        val prefs = getSharedPreferences("UserData", MODE_PRIVATE)
         if (prefs.getBoolean("isSetupDone",false)){
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
@@ -51,7 +50,7 @@ class WeightSetupActivtiy : AppCompatActivity() {
         var currentStep = 1
         updateAdapter(weightList)
         binding.tvSetup.text = "Выберите вес"
-        val layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false)
+        val layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.RecyclerView.layoutManager = layoutManager
 
         val snapHelper = LinearSnapHelper()
@@ -144,14 +143,14 @@ class WeightSetupActivtiy : AppCompatActivity() {
         binding.RecyclerView.scrollToPosition(0)
     }
     fun saveUserData(key: String,value: String){
-        val sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE)
+        val sharedPreferences = getSharedPreferences("UserData", MODE_PRIVATE)
         sharedPreferences.edit {
             putString(key, value)
         }
     }
     fun setGoalWeight(goal: String){
         saveUserData("goal",goal)
-        val sharedPreference = getSharedPreferences("UserData", Context.MODE_PRIVATE)
+        val sharedPreference = getSharedPreferences("UserData", MODE_PRIVATE)
         sharedPreference.edit().putBoolean("isSetupDone",true).apply()
 //        val intent = Intent(this, MainActivity::class.java)
 //        startActivity(intent)
@@ -159,11 +158,10 @@ class WeightSetupActivtiy : AppCompatActivity() {
     }
     fun setMovieLife(movie: String){
         saveUserData("movie",movie)
-        val sharedPreference = getSharedPreferences("UserData", Context.MODE_PRIVATE)
+        val sharedPreference = getSharedPreferences("UserData", MODE_PRIVATE)
         sharedPreference.edit().putBoolean("isSetupDone",true).apply()
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
         finish()
     }
 }
-
