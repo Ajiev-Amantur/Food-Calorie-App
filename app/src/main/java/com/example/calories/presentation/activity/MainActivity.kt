@@ -1,10 +1,8 @@
-package com.example.calories.presentation
+package com.example.calories.presentation.activity
 
-import android.content.Context
 import android.content.Intent
 import android.icu.util.Calendar
 import android.os.Bundle
-import android.view.View
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -12,7 +10,6 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.calories.presentation.DetailProgressActivity
 import com.example.calories.R
 import com.example.calories.data.Food
 import com.example.calories.data.FoodDataBase
@@ -20,8 +17,8 @@ import com.example.calories.databinding.ActivityMainBinding
 import com.example.calories.presentation.adapter.FoodSelectedAdapter
 import com.google.android.material.datepicker.MaterialDatePicker
 import kotlinx.coroutines.launch
-import java.util.Date
 import java.text.SimpleDateFormat
+import java.util.Date
 import java.util.Locale
 
 class MainActivity : AppCompatActivity() {
@@ -40,14 +37,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(binding.root)
-        
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
-        db = FoodDataBase.getDataBase(this)
+        db = FoodDataBase.Companion.getDataBase(this)
         setupMealRecyclerViews()
 
         val datePicker = MaterialDatePicker.Builder.datePicker()
@@ -55,7 +52,9 @@ class MainActivity : AppCompatActivity() {
             .setSelection(selectedDate)
             .build()
 
-        binding.tvCalendarData.text = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault()).format(Date(selectedDate))
+        binding.tvCalendarData.text = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault()).format(
+            Date(selectedDate)
+        )
 
         binding.tvCalendarData.setOnClickListener {
             datePicker.show(supportFragmentManager, "Material_Date_Picker")
@@ -63,7 +62,9 @@ class MainActivity : AppCompatActivity() {
 
         datePicker.addOnPositiveButtonClickListener { selected ->
             selectedDate = selected
-            binding.tvCalendarData.text = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault()).format(Date(selectedDate))
+            binding.tvCalendarData.text = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault()).format(
+                Date(selectedDate)
+            )
             dataUpdates()
         }
 
@@ -75,13 +76,16 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra("kcalProgress", (binding.progressCallories.progress))
             startActivity(intent)
         }
-
+        binding.navigationSettings.setOnClickListener {
+            val intent = Intent(this, SettingsActivity::class.java)
+            startActivity(intent)
+        }
         // Клики по кнопкам "Добавить"
         binding.frameAddFood1.setOnClickListener { openAddFood(1) } // Завтрак
         binding.frameAddFood2.setOnClickListener { openAddFood(2) } // Обед
         binding.frameAddFood3.setOnClickListener { openAddFood(3) } // Ужин
         binding.frameAddFood4.setOnClickListener { openAddFood(4) } // Перекус
-        
+
         binding.navigationFood.setOnClickListener { openAddFood(0) }
     }
 
@@ -132,7 +136,7 @@ class MainActivity : AppCompatActivity() {
 
         lifecycleScope.launch {
             val dayFood = db.foodDao().getFoodByDate(startTime, endTime)
-            
+
             // Распределяем еду по маленьким спискам
             breakfastAdapter.updateData(dayFood.filter { it.mealType == 1 })
             lunchAdapter.updateData(dayFood.filter { it.mealType == 2 })
@@ -177,7 +181,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun FilterFood(): Map<String, Int> {
-        val prefs = getSharedPreferences("UserData", Context.MODE_PRIVATE)
+        val prefs = getSharedPreferences("UserData", MODE_PRIVATE)
         val weight = prefs.getString("weight", "70")?.filter { it.isDigit() }?.toIntOrNull() ?: 70
         val height = prefs.getString("height", "175")?.filter { it.isDigit() }?.toIntOrNull() ?: 175
         val age = prefs.getString("age", "25")?.filter { it.isDigit() }?.toIntOrNull() ?: 25

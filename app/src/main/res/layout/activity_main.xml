@@ -6,7 +6,7 @@
     android:background="#ecebeb"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.MainActivity">
+    tools:context=".presentation.activity.MainActivity">
 
     <ScrollView
         android:layout_width="match_parent"
