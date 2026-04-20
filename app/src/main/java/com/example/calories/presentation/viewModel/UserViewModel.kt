@@ -1,10 +1,14 @@
 package com.example.calories.presentation.viewModel
 
+import androidx.lifecycle.ViewModel
 import com.example.calories.domain.usecase.UserUseCase
 
-class UserViewModel(private val userUseCase: UserUseCase) {
+class UserViewModel(private val userUseCase: UserUseCase): ViewModel() {
 
-    fun load(){
-        userUseCase.saveUserData()
+    fun saveParams(key: String,value: String){
+        userUseCase.saveUserData(key,value)
+    }
+    fun isCompleted(){
+        userUseCase.isCompleted()
     }
 }

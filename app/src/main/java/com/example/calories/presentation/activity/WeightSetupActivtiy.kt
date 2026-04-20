@@ -13,8 +13,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import com.example.calories.databinding.ActivityWeightSetupActivtiyBinding
 import com.example.calories.presentation.adapter.WeightSetupAdapter
+import com.example.calories.presentation.viewModel.UserViewModel
 
 class WeightSetupActivtiy : AppCompatActivity() {
+    private lateinit var userViewModel: UserViewModel
     private var isSelectingGoal = true // Сначала выбираем цель, потом активность
 
     private lateinit var adapter: WeightSetupAdapter
