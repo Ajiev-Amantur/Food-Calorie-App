@@ -186,7 +186,7 @@ class MainActivity : AppCompatActivity() {
         val height = prefs.getString("height", "175")?.filter { it.isDigit() }?.toIntOrNull() ?: 175
         val age = prefs.getString("age", "25")?.filter { it.isDigit() }?.toIntOrNull() ?: 25
         val goalMode = prefs.getString("goal", "weightNormal") ?: "weightNormal"
-        val moveMode = prefs.getString("movie", "moveNormal") ?: "moveNormal"
+        val moveMode = prefs.getString("goal", "moveNormal") ?: "moveNormal"
 
         return calculateMifflin(weight, height, age, goalMode, moveMode)
     }
