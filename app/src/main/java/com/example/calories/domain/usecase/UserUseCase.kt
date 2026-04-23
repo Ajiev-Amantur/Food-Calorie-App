@@ -1,13 +1,15 @@
 package com.example.calories.domain.usecase
 
 import com.example.calories.domain.repository.UserRepository
+import com.example.calories.presentation.adapter.WeightSetupAdapter
 
 class UserUseCase(private val userRepository: UserRepository) {
 
-    fun saveUserData(key: String,value: String){
-        userRepository.saveUserParams(key,value)
+    fun saveUserData(key: String, value: String) {
+        userRepository.saveUserParams(key, value)
     }
-    fun isCompleted(){
-        userRepository.isCompleted()
+
+    fun isCompleted(goal: String) {
+        userRepository.isCompleted(goal)
     }
 }

@@ -7,11 +7,13 @@ class UserRepositoryImpl(private val context: Context): UserRepository {
 
     override fun saveUserParams(key: String, value: String) {
         val sharedPreferences = context.getSharedPreferences("Data", Context.MODE_PRIVATE)
-        sharedPreferences.edit().putString(key,value).apply()
+        sharedPreferences.edit().putString(key, value).apply()
     }
 
-    override fun isCompleted() {
+    override fun isCompleted(goal: String) {
         val sharedPreferences = context.getSharedPreferences("Data", Context.MODE_PRIVATE)
-        sharedPreferences.edit().putBoolean("IsSetupComplete",true).apply()
+        sharedPreferences.edit().putBoolean("IsSetupComplete", true).apply()
+        saveUserParams("goal",goal)
     }
+
 }

@@ -8,7 +8,8 @@ class UserViewModel(private val userUseCase: UserUseCase): ViewModel() {
     fun saveParams(key: String,value: String){
         userUseCase.saveUserData(key,value)
     }
-    fun isCompleted(){
+    fun isCompleted(goal: String){
         userUseCase.isCompleted()
     }
+
 }

@@ -181,7 +181,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun FilterFood(): Map<String, Int> {
-        val prefs = getSharedPreferences("UserData", MODE_PRIVATE)
+        val prefs = getSharedPreferences("Data", MODE_PRIVATE)
         val weight = prefs.getString("weight", "70")?.filter { it.isDigit() }?.toIntOrNull() ?: 70
         val height = prefs.getString("height", "175")?.filter { it.isDigit() }?.toIntOrNull() ?: 175
         val age = prefs.getString("age", "25")?.filter { it.isDigit() }?.toIntOrNull() ?: 25
