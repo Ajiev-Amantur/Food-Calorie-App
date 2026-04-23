@@ -8,8 +8,11 @@ class UserViewModel(private val userUseCase: UserUseCase): ViewModel() {
     fun saveParams(key: String,value: String){
         userUseCase.saveUserData(key,value)
     }
-    fun isCompleted(goal: String){
+    fun isCompleted(){
         userUseCase.isCompleted()
     }
 
+    fun getDailyKcal(): Map<String ,Int>{
+        return userUseCase.calculateDailyCalories()
+    }
 }

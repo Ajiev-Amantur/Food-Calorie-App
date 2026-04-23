@@ -72,26 +72,20 @@ class WeightSetupActivtiy : AppCompatActivity() {
             when (currentStep) {
                 1 -> {
                     userViewModel.saveParams("weight", selected)
-                    Log.d("ololo", "Вес: $selected")
-
                     currentStep = 2
                     updateAdapter(ageList)
-
                     binding.tvSetup.text = "Выберите возраст"
                 }
 
                 2 -> {
                     userViewModel.saveParams("age", selected)
                     currentStep = 3
-                    Log.d("ololo", "Выбран Возраст: $selected")
                     updateAdapter(HeightList)
                     binding.tvSetup.text = "Выберите рост"
                 }
 
                 3 -> {
                     userViewModel.saveParams("height", value = selected)
-//                    saveUserData("height", selected)
-                    Log.d("ololo", "Выбран Рост: $selected")
                     binding.tvSetup.visibility = View.GONE
                     binding.RecyclerView.visibility = View.GONE
                     binding.Button.visibility = View.GONE
@@ -111,11 +105,7 @@ class WeightSetupActivtiy : AppCompatActivity() {
                     binding.Frame3.setOnClickListener {
                         handleFrameClick("weightNormal", "moveNormal")
                     }
-//                    val sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE)
-//                    sharedPreferences.edit().putBoolean("isSetupDone",true).apply()
-//                    val intent = Intent(this, MainActivity::class.java)
-//                    startActivity(intent)
-//                    finish()
+
                 }
 
             }
@@ -128,7 +118,6 @@ class WeightSetupActivtiy : AppCompatActivity() {
 
         if (isSelectingGoal) {
             userViewModel.saveParams("goal", value = goalValue)
-            // saveUserData("goal", goalValue) // Сохраняем цель
             isSelectingGoal = false         // Переключаем режим на выбор активности
             // Скрываем картинки целей
             binding.ivSetLessWeight.visibility = View.GONE
@@ -137,7 +126,8 @@ class WeightSetupActivtiy : AppCompatActivity() {
             // Меняем тексты на активность
             updateFrameTexts("Сидячий образ", "Легкая активность", "Высокая активность")
         } else {
-            userViewModel.isCompleted(activityValue)
+            userViewModel.saveParams("activity", activityValue)
+            userViewModel.isCompleted()
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
@@ -157,19 +147,4 @@ class WeightSetupActivtiy : AppCompatActivity() {
         binding.RecyclerView.adapter = WeightSetupAdapter(list)
         binding.RecyclerView.scrollToPosition(0)
     }
-//    fun saveUserData(key: String,value: String){
-//        val sharedPreferences = getSharedPreferences("UserData", MODE_PRIVATE)
-//        sharedPreferences.edit {
-//            putString(key, value)
-//        }
-//    }
-//    fun setGoalLife(goal: String){
-//        saveUserData("goal",goal)
-//        val sharedPreference = getSharedPreferences("UserData", MODE_PRIVATE)
-//        sharedPreference.edit().putBoolean("isSetupDone",true).apply()
-//        val intent = Intent(this, MainActivity::class.java)
-//        startActivity(intent)
-//        finish()
-//    }
-//}
 }

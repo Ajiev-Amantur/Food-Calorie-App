@@ -15,13 +15,16 @@ import com.example.calories.data.Food
 import com.example.calories.data.FoodDataBase
 import com.example.calories.databinding.ActivityMainBinding
 import com.example.calories.presentation.adapter.FoodSelectedAdapter
+import com.example.calories.presentation.viewModel.UserViewModel
 import com.google.android.material.datepicker.MaterialDatePicker
 import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
 class MainActivity : AppCompatActivity() {
+    private val userViewModel: UserViewModel by viewModel()
     private lateinit var binding: ActivityMainBinding
     private lateinit var db: FoodDataBase
     private var selectedDate: Long = MaterialDatePicker.todayInUtcMilliseconds()
@@ -51,43 +54,48 @@ class MainActivity : AppCompatActivity() {
             .setTitleText("Выберите дату")
             .setSelection(selectedDate)
             .build()
+        binding.apply {
+            tvCalendarData.text =
+                SimpleDateFormat("dd.MM.yyyy", Locale.getDefault()).format(
+                    Date(selectedDate)
+                )
 
-        binding.tvCalendarData.text = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault()).format(
-            Date(selectedDate)
-        )
+            tvCalendarData.setOnClickListener {
+                datePicker.show(supportFragmentManager, "Material_Date_Picker")
+            }
 
-        binding.tvCalendarData.setOnClickListener {
-            datePicker.show(supportFragmentManager, "Material_Date_Picker")
+            datePicker.addOnPositiveButtonClickListener { selected ->
+                selectedDate = selected
+                tvCalendarData.text =
+                    SimpleDateFormat("dd.MM.yyyy", Locale.getDefault()).format(
+                        Date(selectedDate)
+                    )
+                dataUpdates()
+            }
         }
-
-        datePicker.addOnPositiveButtonClickListener { selected ->
-            selectedDate = selected
-            binding.tvCalendarData.text = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault()).format(
-                Date(selectedDate)
-            )
-            dataUpdates()
-        }
-
         binding.navigationGrafic.setOnClickListener {
             val intent = Intent(this, DetailProgressActivity::class.java)
             intent.putExtra("Selected_Date", selectedDate)
             // Передаем текущий прогресс для BarChart
-            val goals = FilterFood()
             intent.putExtra("kcalProgress", (binding.progressCallories.progress))
             startActivity(intent)
         }
+
         binding.navigationSettings.setOnClickListener {
             val intent = Intent(this, SettingsActivity::class.java)
             startActivity(intent)
         }
-        // Клики по кнопкам "Добавить"
-        binding.frameAddFood1.setOnClickListener { openAddFood(1) } // Завтрак
-        binding.frameAddFood2.setOnClickListener { openAddFood(2) } // Обед
-        binding.frameAddFood3.setOnClickListener { openAddFood(3) } // Ужин
-        binding.frameAddFood4.setOnClickListener { openAddFood(4) } // Перекус
+        binding.apply {
+            // Клики по кнопкам "Добавить"
+            frameAddFood1.setOnClickListener { openAddFood(1) } // Завтрак
+            frameAddFood2.setOnClickListener { openAddFood(2) } // Обед
+            frameAddFood3.setOnClickListener { openAddFood(3) } // Ужин
+            frameAddFood4.setOnClickListener { openAddFood(4) } // Перекус
 
-        binding.navigationFood.setOnClickListener { openAddFood(0) }
+            navigationFood.setOnClickListener { openAddFood(0) }
+        }
     }
+
 
     private fun setupMealRecyclerViews() {
         // Инициализируем адаптеры с функцией удаления
@@ -143,7 +151,7 @@ class MainActivity : AppCompatActivity() {
             dinnerAdapter.updateData(dayFood.filter { it.mealType == 3 })
             snacksAdapter.updateData(dayFood.filter { it.mealType == 4 })
 
-            val goals = FilterFood()
+            val goals = userViewModel.getDailyKcal()
             val totalKcal = dayFood.sumOf { it.calories }
             val totalCarbs = dayFood.sumOf { it.carbs.toDouble() }
             val totalProtein = dayFood.sumOf { it.protein.toDouble() }
@@ -180,37 +188,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun FilterFood(): Map<String, Int> {
-        val prefs = getSharedPreferences("Data", MODE_PRIVATE)
-        val weight = prefs.getString("weight", "70")?.filter { it.isDigit() }?.toIntOrNull() ?: 70
-        val height = prefs.getString("height", "175")?.filter { it.isDigit() }?.toIntOrNull() ?: 175
-        val age = prefs.getString("age", "25")?.filter { it.isDigit() }?.toIntOrNull() ?: 25
-        val goalMode = prefs.getString("goal", "weightNormal") ?: "weightNormal"
-        val moveMode = prefs.getString("goal", "moveNormal") ?: "moveNormal"
 
-        return calculateMifflin(weight, height, age, goalMode, moveMode)
-    }
-
-    fun calculateMifflin(weight: Int, height: Int, age: Int, mode: String, movie: String): Map<String, Int> {
-        val bmr = (10 * weight) + (6.25 * height) - (5 * age) + 5
-        val factor = when (movie) {
-            "moveLess" -> 1.2
-            "moveMore" -> 1.55
-            else -> 1.375
-        }
-        var finalGoal = bmr * factor
-        when (mode) {
-            "weightLess" -> finalGoal -= 500
-            "weightMore" -> finalGoal += 500
-        }
-
-        return mapOf(
-            "kcal" to finalGoal.toInt(),
-            "protein" to (finalGoal * 0.20 / 4).toInt(),
-            "fat" to (finalGoal * 0.30 / 9).toInt(),
-            "carbs" to (finalGoal * 0.50 / 4).toInt()
-        )
-    }
 
     private fun openAddFood(mealType: Int) {
         val intent = Intent(this, FoodAddActivity::class.java)
