@@ -59,8 +59,8 @@ class FoodAddActivity : AppCompatActivity() {
 
         val repository = FoodRepositoryImpl(this)
         val foodUseCase = FoodUseCase(repository)
-        viewModel(foodUseCase)
-                foodAdapter.updateData(food)
+//        foodViewModel(foodUseCase)
+//                foodAdapter.updateData(food)
 
 
                 binding.RecyclerView.visibility = View.VISIBLE
