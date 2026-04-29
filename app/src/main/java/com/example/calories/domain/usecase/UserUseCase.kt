@@ -1,8 +1,6 @@
 package com.example.calories.domain.usecase
 
-import android.content.Context
 import com.example.calories.domain.repository.UserRepository
-import com.example.calories.presentation.adapter.WeightSetupAdapter
 
 class UserUseCase(private val userRepository: UserRepository) {
 

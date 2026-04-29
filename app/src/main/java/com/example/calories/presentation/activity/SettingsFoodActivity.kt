@@ -7,7 +7,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import com.example.calories.R
-import com.example.calories.data.Food
+import com.example.calories.data.FoodDto
 import com.example.calories.data.FoodDataBase
 import com.example.calories.data.cal1
 import com.example.calories.data.carbs
@@ -72,7 +72,7 @@ class SettingsFoodActivity : AppCompatActivity() {
             val finalCarbs = carbs1 * factor
 
             lifecycleScope.launch {
-                val eatenFood = Food(
+                val eatenFoodDto = FoodDto(
                     name = foodName,
                     calories = finalKcal,
                     protein = finalProtein,
@@ -82,7 +82,7 @@ class SettingsFoodActivity : AppCompatActivity() {
                     date = selectedDate,
                     mealType = mealType
                 )
-                db.foodDao().addFood(eatenFood)
+                db.foodDao().addFood(eatenFoodDto)
 
                 // Обновляем и глобальные переменные для мгновенного эффекта
                 cal1 += finalKcal

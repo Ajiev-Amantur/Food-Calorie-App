@@ -3,12 +3,12 @@ package com.example.calories.presentation.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.calories.data.Food
+import com.example.calories.data.FoodDto
 import com.example.calories.databinding.ItemFoodSelectedBinding
 
 class FoodSelectedAdapter(
-    private var foods: List<Food>,
-    private val onDeleteClick: (Food) -> Unit
+    private var foodDtos: List<FoodDto>,
+    private val onDeleteClick: (FoodDto) -> Unit
 ) : RecyclerView.Adapter<FoodSelectedAdapter.ViewHolder>() {
 
     class ViewHolder(val binding: ItemFoodSelectedBinding) : RecyclerView.ViewHolder(binding.root)
@@ -19,7 +19,7 @@ class FoodSelectedAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val food = foods[position]
+        val food = foodDtos[position]
         holder.binding.tvFoodName.text = food.name
         holder.binding.tvFoodKcal.text = "${food.calories} ккал"
 
@@ -28,10 +28,10 @@ class FoodSelectedAdapter(
         }
     }
 
-    override fun getItemCount(): Int = foods.size
+    override fun getItemCount(): Int = foodDtos.size
 
-    fun updateData(newFoods: List<Food>) {
-        foods = newFoods
+    fun updateData(newFoodDtos: List<FoodDto>) {
+        foodDtos = newFoodDtos
         notifyDataSetChanged()
     }
 }

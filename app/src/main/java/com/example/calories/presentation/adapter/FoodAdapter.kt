@@ -3,10 +3,10 @@ package com.example.calories.presentation.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.calories.data.Food
+import com.example.calories.data.FoodDto
 import com.example.calories.databinding.ItemFoodBinding
 
-class FoodAdapter(private var food: List<Food>, val click : (Food) -> Unit): RecyclerView.Adapter<FoodAdapter.ViewHolder>()  {
+class FoodAdapter(private var foodDto: List<FoodDto>, val click : (FoodDto) -> Unit): RecyclerView.Adapter<FoodAdapter.ViewHolder>()  {
    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
        val binding = ItemFoodBinding.inflate(LayoutInflater.from(parent.context),parent,false)
        return ViewHolder(binding)
@@ -14,7 +14,7 @@ class FoodAdapter(private var food: List<Food>, val click : (Food) -> Unit): Rec
    }
 
    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-       val food = food[position]
+       val food = foodDto[position]
        holder.Bind(food)
        holder.itemView.setOnClickListener {
            click(food)
@@ -22,15 +22,15 @@ class FoodAdapter(private var food: List<Food>, val click : (Food) -> Unit): Rec
    }
 
    override fun getItemCount(): Int {
-       return food.size
+       return foodDto.size
    }
 
    class ViewHolder(private val binding: ItemFoodBinding): RecyclerView.ViewHolder(binding.root) {
-       fun Bind(food: Food) {
-           binding.tvName.text = food.name
+       fun Bind(foodDto: FoodDto) {
+           binding.tvName.text = foodDto.name
 //            binding.tvFats.text = "Жиры: ${food.fat}"
-           binding.tvCalories.text = "Калории: ${food.calories}"
-            var decs = food.description
+           binding.tvCalories.text = "Калории: ${foodDto.calories}"
+            var decs = foodDto.description
 //            binding.tvCarbs.text =  "Углеводы: ${food.carbs}"
 //            binding.tvProteins.text =  "Белки: ${food.protein}"
 
@@ -38,8 +38,8 @@ class FoodAdapter(private var food: List<Food>, val click : (Food) -> Unit): Rec
 
        }
    }
-   fun updateData(newFood: List<Food>) {
-      food = newFood
+   fun updateData(newFoodDto: List<FoodDto>) {
+      foodDto = newFoodDto
        notifyDataSetChanged()
    }
 }

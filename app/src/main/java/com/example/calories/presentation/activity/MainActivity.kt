@@ -11,7 +11,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.calories.R
-import com.example.calories.data.Food
+import com.example.calories.data.FoodDto
 import com.example.calories.data.FoodDataBase
 import com.example.calories.databinding.ActivityMainBinding
 import com.example.calories.presentation.adapter.FoodSelectedAdapter
@@ -116,11 +116,11 @@ class MainActivity : AppCompatActivity() {
         binding.rvSnacks.adapter = snacksAdapter
     }
 
-    private fun deleteFood(food: Food) {
+    private fun deleteFood(foodDto: FoodDto) {
         lifecycleScope.launch {
-            db.foodDao().deleteFood(food)
+            db.foodDao().deleteFood(foodDto)
             dataUpdates() // Обновляем всё после удаления
-            Toast.makeText(this@MainActivity, "${food.name} удалено", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@MainActivity, "${foodDto.name} удалено", Toast.LENGTH_SHORT).show()
         }
     }
 

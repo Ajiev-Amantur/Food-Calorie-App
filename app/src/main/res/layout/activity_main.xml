@@ -23,6 +23,8 @@
             android:paddingBottom="20dp">
 
             <TextView
+                android:textColor="@color/black"
+                android:textStyle="bold|italic"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Calendar"

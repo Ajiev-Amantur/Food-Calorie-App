@@ -9,13 +9,13 @@ import androidx.room.Query
 @Dao
 interface Dao {
     @Query("SELECT * FROM food")
-    suspend fun getAllFood(): List<Food>
+    suspend fun getAllFood(): List<FoodDto>
 
     @Query("SELECT * FROM food WHERE date >= :startTime AND date <= :endTime")
-    suspend fun getFoodByDate(startTime: Long, endTime: Long): List<Food>
+    suspend fun getFoodByDate(startTime: Long, endTime: Long): List<FoodDto>
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun addFood(food: Food)
+    suspend fun addFood(foodDto: FoodDto)
 
     @Delete
-    suspend fun deleteFood(food: Food)
+    suspend fun deleteFood(foodDto: FoodDto)
 }

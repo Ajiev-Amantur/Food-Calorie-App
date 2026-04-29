@@ -9,22 +9,20 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.calories.data.Food
+import com.example.calories.data.FoodDto
 import com.example.calories.data.FoodDataBase
 import com.example.calories.data.repository.FoodRepositoryImpl
 import com.example.calories.databinding.ActivityFoodAddBinding
 import com.example.calories.domain.FoodUseCase.FoodUseCase
 import com.example.calories.presentation.FoodViewModel.FoodViewModel
 import com.example.calories.presentation.adapter.FoodAdapter
-import kotlinx.coroutines.launch
 
 class FoodAddActivity : AppCompatActivity() {
 
     private val foodViewModel: FoodViewModel by viewModels()
     private lateinit var foodAdapter: FoodAdapter
-    private var FoodList: List<Food> = emptyList()
+    private var foodDtoList: List<FoodDto> = emptyList()
     private lateinit var binding: ActivityFoodAddBinding
     private lateinit var db: FoodDataBase
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -70,7 +68,7 @@ class FoodAddActivity : AppCompatActivity() {
 
         binding.frameSearch.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
             override fun onQueryTextChange(p0: String?): Boolean {
-                val search = FoodList.filter { food ->
+                val search = foodDtoList.filter { food ->
                     food.name.contains(p0 ?: "", ignoreCase = true )
                 }
                foodAdapter.updateData(search)
