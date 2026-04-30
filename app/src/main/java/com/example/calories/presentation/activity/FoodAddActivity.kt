@@ -10,11 +10,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.calories.data.FoodDto
 import com.example.calories.data.FoodDataBase
-import com.example.calories.data.repository.FoodRepositoryImpl
 import com.example.calories.databinding.ActivityFoodAddBinding
-import com.example.calories.domain.FoodUseCase.FoodUseCase
+import com.example.calories.domain.model.Food
 import com.example.calories.presentation.FoodViewModel.FoodViewModel
 import com.example.calories.presentation.adapter.FoodAdapter
 
@@ -22,7 +20,7 @@ class FoodAddActivity : AppCompatActivity() {
 
     private val foodViewModel: FoodViewModel by viewModels()
     private lateinit var foodAdapter: FoodAdapter
-    private var foodDtoList: List<FoodDto> = emptyList()
+    private var food: List<Food> = emptyList()
     private lateinit var binding: ActivityFoodAddBinding
     private lateinit var db: FoodDataBase
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,14 +51,12 @@ class FoodAddActivity : AppCompatActivity() {
             startActivity(intent)
 
         })
-
+        foodViewModel.food.observe(this){ foods ->
+            food = foods
+            foodAdapter.updateData(foods)
+        }
         binding.RecyclerView.layoutManager = LinearLayoutManager(this)
         binding.RecyclerView.adapter = foodAdapter
-
-        val repository = FoodRepositoryImpl(this)
-        val foodUseCase = FoodUseCase(repository)
-//        foodViewModel(foodUseCase)
-//                foodAdapter.updateData(food)
 
 
                 binding.RecyclerView.visibility = View.VISIBLE
@@ -68,7 +64,7 @@ class FoodAddActivity : AppCompatActivity() {
 
         binding.frameSearch.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
             override fun onQueryTextChange(p0: String?): Boolean {
-                val search = foodDtoList.filter { food ->
+                val search = food.filter { food ->
                     food.name.contains(p0 ?: "", ignoreCase = true )
                 }
                foodAdapter.updateData(search)

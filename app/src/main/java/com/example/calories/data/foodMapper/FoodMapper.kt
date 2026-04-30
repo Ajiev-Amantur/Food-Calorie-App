@@ -1,6 +1,6 @@
 package com.example.calories.data.foodMapper
 
-import com.example.calories.data.FoodDto
+import com.example.calories.data.model.FoodDto
 import com.example.calories.domain.model.Food
 
 fun FoodDto.toDomain(): Food {

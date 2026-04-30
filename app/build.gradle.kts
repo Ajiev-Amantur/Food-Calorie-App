@@ -1,7 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
         // ... другие плагины
-    id("com.google.devtools.ksp") // ДОЛЖНО БЫТЬ ЭТО
+    id("com.google.devtools.ksp")
 }
 
 android {

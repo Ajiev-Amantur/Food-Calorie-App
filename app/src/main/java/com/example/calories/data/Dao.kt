@@ -5,6 +5,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import com.example.calories.data.model.FoodDto
 
 @Dao
 interface Dao {
@@ -13,6 +14,7 @@ interface Dao {
 
     @Query("SELECT * FROM food WHERE date >= :startTime AND date <= :endTime")
     suspend fun getFoodByDate(startTime: Long, endTime: Long): List<FoodDto>
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun addFood(foodDto: FoodDto)
 

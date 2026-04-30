@@ -11,9 +11,11 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.calories.R
-import com.example.calories.data.FoodDto
 import com.example.calories.data.FoodDataBase
+import com.example.calories.data.foodMapper.toDomain
+import com.example.calories.data.foodMapper.toDto
 import com.example.calories.databinding.ActivityMainBinding
+import com.example.calories.domain.model.Food
 import com.example.calories.presentation.adapter.FoodSelectedAdapter
 import com.example.calories.presentation.viewModel.UserViewModel
 import com.google.android.material.datepicker.MaterialDatePicker
@@ -116,11 +118,11 @@ class MainActivity : AppCompatActivity() {
         binding.rvSnacks.adapter = snacksAdapter
     }
 
-    private fun deleteFood(foodDto: FoodDto) {
+    private fun deleteFood(food: Food) {
         lifecycleScope.launch {
-            db.foodDao().deleteFood(foodDto)
+            db.foodDao().deleteFood(food.toDto())
             dataUpdates() // Обновляем всё после удаления
-            Toast.makeText(this@MainActivity, "${foodDto.name} удалено", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@MainActivity, "${food.name} удалено", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -144,12 +146,11 @@ class MainActivity : AppCompatActivity() {
 
         lifecycleScope.launch {
             val dayFood = db.foodDao().getFoodByDate(startTime, endTime)
-
             // Распределяем еду по маленьким спискам
-            breakfastAdapter.updateData(dayFood.filter { it.mealType == 1 })
-            lunchAdapter.updateData(dayFood.filter { it.mealType == 2 })
-            dinnerAdapter.updateData(dayFood.filter { it.mealType == 3 })
-            snacksAdapter.updateData(dayFood.filter { it.mealType == 4 })
+            breakfastAdapter.updateData(dayFood.map { it.toDomain() }.filter { it.mealType == 1 })
+            lunchAdapter.updateData(dayFood.map { it.toDomain()}.filter { it.mealType == 2 })
+            dinnerAdapter.updateData(dayFood.map {it.toDomain() }.filter { it.mealType == 3 })
+            snacksAdapter.updateData(dayFood.map{it.toDomain()}.filter { it.mealType == 4 })
 
             val goals = userViewModel.getDailyKcal()
             val totalKcal = dayFood.sumOf { it.calories }

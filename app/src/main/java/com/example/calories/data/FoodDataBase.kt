@@ -4,6 +4,8 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.calories.data.model.FoodDto
+import com.example.calories.domain.model.Food
 
 @Database(entities = [FoodDto::class],version = 1)
 abstract class FoodDataBase: RoomDatabase() {
