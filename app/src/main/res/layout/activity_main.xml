@@ -426,7 +426,7 @@
                 android:layout_width="0dp"
                 android:layout_height="30dp"
                 android:layout_weight="1"
-                android:src="@drawable/ic_food"/>
+                android:src="@drawable/baseline_settings_24"/>
         </LinearLayout>
     </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

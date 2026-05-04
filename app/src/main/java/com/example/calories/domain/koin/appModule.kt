@@ -17,7 +17,7 @@ val appModule = module{
     factory { UserUseCase(get()) }
     viewModel { UserViewModel(get()) }
 
-    single < FoodRepository>{ FoodRepositoryImpl(get()) }
+    single<FoodRepository> { FoodRepositoryImpl(androidContext()) }
 
     factory { FoodUseCase(get()) }
 

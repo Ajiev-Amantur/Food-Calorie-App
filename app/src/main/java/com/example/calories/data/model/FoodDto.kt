@@ -13,6 +13,6 @@ data class FoodDto(
     val protein: Float,
     val fat: Float,
     val description: String = "",
-    val date: Long,
-    val mealType: Int // 1-завтрак, 2-обед, 3-ужин, 4-перекус
+    val date: Long = 0L,
+    val mealType: Int = 0
 )

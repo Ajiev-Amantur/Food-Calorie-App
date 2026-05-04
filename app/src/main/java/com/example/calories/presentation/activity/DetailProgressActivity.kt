@@ -12,6 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import com.example.calories.R
 import com.example.calories.data.FoodDataBase
 import com.example.calories.databinding.ActivityDetailProgressBinding
+import com.example.calories.presentation.viewModel.UserViewModel
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
@@ -22,11 +23,13 @@ import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.github.mikephil.charting.formatter.PercentFormatter
 import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
 class DetailProgressActivity : AppCompatActivity() {
+    private val userViewModel: UserViewModel by viewModel()
     private lateinit var db: FoodDataBase
     private lateinit var binding: ActivityDetailProgressBinding
 
@@ -38,7 +41,7 @@ class DetailProgressActivity : AppCompatActivity() {
 
         db = FoodDataBase.Companion.getDataBase(this)
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.DetailProgressActivity)) { v, insets ->
+        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
@@ -52,13 +55,13 @@ class DetailProgressActivity : AppCompatActivity() {
         setupCharts(selectedDate)
     }
 
+
     private fun setupCharts(date: Long) {
         lifecycleScope.launch {
             // 1. Получаем данные за неделю для BarChart
             val barEntries = ArrayList<BarEntry>()
             val labels = ArrayList<String>()
             val sdf = SimpleDateFormat("dd.MM", Locale.getDefault())
-
             for (i in 6 downTo 0) {
                 val cal = Calendar.getInstance()
                 cal.timeInMillis = date
@@ -99,11 +102,20 @@ class DetailProgressActivity : AppCompatActivity() {
             val totalF = todayFood.sumOf { it.fat.toDouble() }.toFloat()
             val totalC = todayFood.sumOf { it.carbs.toDouble() }.toFloat()
 
-            binding.tvKcal.text = "${totalK} ккал"
-            // Допустим норма 2500, если нет других данных
-            binding.progressKcal.progress = if (totalK < 2500) (totalK * 100 / 2500) else 100
+           val kcal=  userViewModel.getDailyKcal()
+            val kcalNormal = kcal["kcal"] ?: 2000
 
+            binding.tvKcal.text = "${kcalNormal} ккал"
+            binding.tvTargetKcal2.text = "target: ${totalK} ккал"
+            binding.tvKcalNormal.text = kcalNormal.toString()
+            // Допустим норма 2500, если нет других данных
+
+            binding.tvTargetKcal.text = "${kcalNormal}/${kcalNormal + 100}"
             updatePieChart(totalP, totalF, totalC)
+
+            val progressNormal = (totalK.toFloat()/kcalNormal.toFloat()) * 100
+            binding.progressKcal.progress = progressNormal.toInt()
+                binding.progressKcalMini.progress = progressNormal.toInt()
         }
     }
 

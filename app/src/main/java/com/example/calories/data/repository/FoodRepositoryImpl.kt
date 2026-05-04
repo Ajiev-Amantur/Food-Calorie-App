@@ -1,6 +1,7 @@
 package com.example.calories.data.repository
 
 import android.content.Context
+import android.util.Log
 import com.example.calories.data.model.FoodDto
 import com.example.calories.data.foodMapper.toDomain
 import com.example.calories.domain.model.Food
@@ -11,17 +12,18 @@ import com.google.gson.reflect.TypeToken
 class FoodRepositoryImpl(private val context: Context) : FoodRepository {
 
     override suspend fun getAllFood(): List<Food> {
+        return try {
+            val jsonString = context.assets.open("produscts.json")
+                .bufferedReader().use { it.readText() }
 
-        val jsonString = context.assets.open("produscts.json")
-            .bufferedReader().use { it.readText() }
+            val listType = object : TypeToken<List<FoodDto>>() {}.type
+            val foodDtoList: List<FoodDto> = Gson().fromJson(jsonString, listType)
 
-        // 1. Парсим JSON в DTO
-        val listType = object : TypeToken<List<FoodDto>>() {}.type
-        val foodDtoList: List<FoodDto> = Gson().fromJson(jsonString, listType)
-
-        // 2. Превращаем DTO в чистые модели с помощью маппера
-        return foodDtoList.map { it.toDomain() }
+            foodDtoList.map { it.toDomain() }
+        } catch (e: Exception) {
+            Log.e("FOOD_ERROR", "Ошибка загрузки JSON: ${e.message}")
+            e.printStackTrace()
+            emptyList()
+        }
     }
 }
-
-

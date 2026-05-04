@@ -11,7 +11,7 @@
 
     <TextView
         android:id="@+id/tv_setup"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="Выберите вес"
@@ -25,7 +25,11 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/RecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
+        android:orientation="horizontal"
+        android:clipToPadding="false"
+        android:paddingStart="150dp"
+        android:paddingEnd="150dp"
         app:layout_constraintBottom_toTopOf="@id/Button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -47,103 +51,108 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <LinearLayout
+        android:id="@+id/RecyclerViewCon"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:id="@+id/RecyclerViewCon">
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
 
         <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_margin="20dp"
             android:id="@+id/Frame1"
-            android:background="@drawable/ic_shape_white"
-            android:layout_height="wrap_content">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:orientation="horizontal"
-                android:layout_height="wrap_content">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="30dp"
-                android:textSize="22sp"
-                android:layout_weight="1"
-                android:id="@+id/tv_setLessWeight"
-                android:textStyle="italic|bold"
-                android:text="Хотите сбросить вес"/>
-        <ImageView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginEnd="12dp"
-            android:id="@+id/iv_setLessWeight"
-            android:layout_gravity="center"
-            android:src="@drawable/weight_13075946"/>
-    </LinearLayout>
-        </FrameLayout>
-        <FrameLayout
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_margin="20dp"
-            android:id="@+id/Frame2"
-            android:background="@drawable/ic_shape_white"
-            android:layout_height="wrap_content">
+            android:background="@drawable/ic_shape_white">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:orientation="horizontal"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/tv_setLessWeight"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textStyle="italic|bold"
-                    android:textSize="22sp"
-                    android:layout_weight="1"
-                    android:id="@+id/tv_setMoreWeight"
                     android:layout_margin="30dp"
-                    android:text="Хотите набрать массу"/>
+                    android:layout_weight="1"
+                    android:text="Хотите сбросить вес"
+                    android:textSize="22sp"
+                    android:textStyle="italic|bold" />
 
                 <ImageView
+                    android:id="@+id/iv_setLessWeight"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:layout_marginEnd="12dp"
-                    android:id="@+id/iv_setMoreWeight"
                     android:layout_gravity="center"
-                    android:src="@drawable/ic_strong_img"/>
+                    android:layout_marginEnd="12dp"
+                    android:src="@drawable/weight_13075946" />
+            </LinearLayout>
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/Frame2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:background="@drawable/ic_shape_white">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_setMoreWeight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="30dp"
+                    android:layout_weight="1"
+                    android:text="Хотите набрать массу"
+                    android:textSize="22sp"
+                    android:textStyle="italic|bold" />
+
+                <ImageView
+                    android:id="@+id/iv_setMoreWeight"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="12dp"
+                    android:src="@drawable/ic_strong_img" />
             </LinearLayout>
 
         </FrameLayout>
+
         <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_margin="20dp"
-            android:background="@drawable/ic_shape_white"
             android:id="@+id/Frame3"
-            android:layout_height="wrap_content">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:background="@drawable/ic_shape_white">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:orientation="horizontal"
-                android:layout_height="wrap_content">
-
-
-            <TextView
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="30dp"
-                android:textStyle="italic|bold"
-                android:layout_weight="1"
-                android:textSize="22sp"
-                android:id="@+id/tv_setNormalWeight"
-                android:text="Хотите придерживаться своего веса"/>
+                android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_marginEnd="12dp"
-                android:id="@+id/iv_setNormalWeight"
-                android:layout_gravity="center"
-                android:src="@drawable/health_12426332"/>
+
+                <TextView
+                    android:id="@+id/tv_setNormalWeight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="30dp"
+                    android:layout_weight="1"
+                    android:text="Хотите придерживаться своего веса"
+                    android:textSize="22sp"
+                    android:textStyle="italic|bold" />
+
+                <ImageView
+                    android:id="@+id/iv_setNormalWeight"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="12dp"
+                    android:src="@drawable/health_12426332" />
             </LinearLayout>
 
         </FrameLayout>
