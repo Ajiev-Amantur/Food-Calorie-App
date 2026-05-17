@@ -1,3 +1,33 @@
 <resources>
     <string name="app_name">Calories</string>
+    <string name="total_calories">Всего калорий</string>
+    <string name="goal_prefix">Цель: </string>
+    <string name="carbs">Углеводы</string>
+    <string name="protein">Белки</string>
+    <string name="fats">Жиры</string>
+    <string name="food_diary">Дневник питания</string>
+    <string name="breakfast">Завтрак</string>
+    <string name="lunch">Обед</string>
+    <string name="dinner">Ужин</string>
+    <string name="snacks">Перекусы</string>
+
+    <string name="profile_title">Профиль</string>
+    <string name="save">Сохранить</string>
+    <string name="weight_hint">Ваш вес (кг)</string>
+    <string name="height_hint">Ваш рост (см)</string>
+
+    <string name="progress_title">Прогресс</string>
+    <string name="daily_total">Всего за сегодня</string>
+    <string name="weight_range">Диапазон веса</string>
+    <string name="nutrition_analytics">Аналитика состава</string>
+
+    <string name="goal_title">Какая ваша цель?</string>
+    <string name="lose_weight">Сбросить вес</string>
+    <string name="gain_weight">Набрать массу</string>
+    <string name="maintain_weight">Поддерживать вес</string>
+    <string name="select_weight">Выберите вес</string>
+
+    <string name="product_name_placeholder">Название продукта</string>
+    <string name="weight_g">Вес (г)</string>
+    <string name="add_to_diary">Добавить в дневник</string>
 </resources>

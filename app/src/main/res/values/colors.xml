@@ -2,14 +2,24 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="white2">#E2D7D7</color>
-    <color name="white_grey">#A99F9F</color>
+    <color name="bg_light">#F2F4F7</color>
+    <color name="text_primary">#1D1D1F</color>
+    <color name="text_secondary">#86868B</color>
+
+    <color name="accent_green">#34C759</color>
+    <color name="accent_blue">#007AFF</color>
+    <color name="accent_yellow">#FFCC00</color>
+    <color name="accent_red">#FF3B30</color>
+
+    <color name="progress_track">#E5E5EA</color>
+    <color name="card_stroke">#10000000</color>
+
+    <color name="green">#8BC34A</color>
     <color name="green1">#D6F3A1</color>
-    <color name="white1">#FFFFFF</color>
     <color name="pink">#FFD1D1</color>
     <color name="grey">#E4E4E7</color>
     <color name="yellow">#FFECB6</color>
     <color name="blue">#CBEBFF</color>
     <color name="red">#FF2056</color>
-    <color name="green">#8BC34A</color>
+    <color name="white_grey">#A99F9F</color>
 </resources>

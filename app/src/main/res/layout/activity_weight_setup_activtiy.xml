@@ -5,157 +5,166 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ecebeb"
+    android:background="@color/bg_light"
     tools:context=".presentation.activity.WeightSetupActivtiy">
-
 
     <TextView
         android:id="@+id/tv_setup"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
         android:gravity="center"
         android:text="Выберите вес"
+        android:textColor="@color/text_primary"
         android:textSize="28sp"
-        android:textStyle="bold|italic"
-        app:layout_constraintBottom_toTopOf="@id/RecyclerView"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/RecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="200dp"
         android:orientation="horizontal"
-        android:clipToPadding="false"
-        android:paddingStart="150dp"
-        android:paddingEnd="150dp"
         app:layout_constraintBottom_toTopOf="@id/Button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_setup"
         tools:listitem="@layout/item_setup_weight" />
 
-    <!-- КНОПКА: Снизу с отступом -->
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/Button"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/green"
+        android:layout_height="64dp"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginBottom="40dp"
+        android:backgroundTint="@color/accent_blue"
         android:text="Далее"
-        android:textSize="30sp"
+        android:textAllCaps="false"
+        android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@+id/RecyclerView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:cornerRadius="32dp"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
+    <!-- GOAL SELECTION OVERLAY (When choosing goal) -->
     <LinearLayout
         android:id="@+id/RecyclerViewCon"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/bg_light"
+        android:gravity="center"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp">
+        android:padding="20dp"
+        android:visibility="gone">
 
-        <FrameLayout
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp"
+            android:text="Какая ваша цель?"
+            android:textColor="@color/text_primary"
+            android:textSize="28sp"
+            android:textStyle="bold" />
+
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/Frame1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:background="@drawable/ic_shape_white">
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="0dp"
+            app:strokeWidth="1dp"
+            app:strokeColor="@color/card_stroke">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="24dp">
 
                 <TextView
                     android:id="@+id/tv_setLessWeight"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_margin="30dp"
                     android:layout_weight="1"
-                    android:text="Хотите сбросить вес"
-                    android:textSize="22sp"
-                    android:textStyle="italic|bold" />
+                    android:text="Сбросить вес"
+                    android:textColor="@color/text_primary"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
 
                 <ImageView
-                    android:id="@+id/iv_setLessWeight"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_gravity="center"
-                    android:layout_marginEnd="12dp"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
                     android:src="@drawable/weight_13075946" />
             </LinearLayout>
-        </FrameLayout>
+        </com.google.android.material.card.MaterialCardView>
 
-        <FrameLayout
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/Frame2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:background="@drawable/ic_shape_white">
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="0dp"
+            app:strokeWidth="1dp"
+            app:strokeColor="@color/card_stroke">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="24dp">
 
                 <TextView
                     android:id="@+id/tv_setMoreWeight"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_margin="30dp"
                     android:layout_weight="1"
-                    android:text="Хотите набрать массу"
-                    android:textSize="22sp"
-                    android:textStyle="italic|bold" />
+                    android:text="Набрать массу"
+                    android:textColor="@color/text_primary"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
 
                 <ImageView
-                    android:id="@+id/iv_setMoreWeight"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_gravity="center"
-                    android:layout_marginEnd="12dp"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
                     android:src="@drawable/ic_strong_img" />
             </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
 
-        </FrameLayout>
-
-        <FrameLayout
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/Frame3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:background="@drawable/ic_shape_white">
+            app:cardCornerRadius="24dp"
+            app:cardElevation="0dp"
+            app:strokeWidth="1dp"
+            app:strokeColor="@color/card_stroke">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="24dp">
 
                 <TextView
                     android:id="@+id/tv_setNormalWeight"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_margin="30dp"
                     android:layout_weight="1"
-                    android:text="Хотите придерживаться своего веса"
-                    android:textSize="22sp"
-                    android:textStyle="italic|bold" />
+                    android:text="Поддерживать вес"
+                    android:textColor="@color/text_primary"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
 
                 <ImageView
-                    android:id="@+id/iv_setNormalWeight"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_gravity="center"
-                    android:layout_marginEnd="12dp"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
                     android:src="@drawable/health_12426332" />
             </LinearLayout>
-
-        </FrameLayout>
+        </com.google.android.material.card.MaterialCardView>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

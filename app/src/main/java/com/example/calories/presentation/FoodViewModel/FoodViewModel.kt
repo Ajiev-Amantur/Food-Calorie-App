@@ -16,7 +16,7 @@ class FoodViewModel(private val foodUseCase: FoodUseCase): ViewModel() {
         viewModelScope.launch {
             try {
                 val foods = foodUseCase.getAllFoods()
-                _food.postValue(foods) // Используем postValue для безопасности потоков
+                _food.postValue(foods)
             } catch (e: Exception) {
                 e.printStackTrace()
             }

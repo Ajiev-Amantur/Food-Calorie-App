@@ -105,8 +105,8 @@ class DetailProgressActivity : AppCompatActivity() {
            val kcal=  userViewModel.getDailyKcal()
             val kcalNormal = kcal["kcal"] ?: 2000
 
-            binding.tvKcal.text = "${kcalNormal} ккал"
-            binding.tvTargetKcal2.text = "target: ${totalK} ккал"
+            binding.tvKcal.text = "${totalK} ккал"
+            binding.tvTargetKcal2.text = "target: ${kcalNormal} ккал"
             binding.tvKcalNormal.text = kcalNormal.toString()
             // Допустим норма 2500, если нет других данных
 
