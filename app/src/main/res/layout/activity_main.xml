@@ -439,12 +439,6 @@
                             app:tint="@color/accent_blue" />
                     </LinearLayout>
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rvLunch"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="16dp"
-                        android:nestedScrollingEnabled="false" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -492,6 +486,13 @@
                             android:layout_height="28dp"
                             android:src="@drawable/ic_add"
                             app:tint="@color/accent_blue" />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rvLunch"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="16dp"
+                            android:nestedScrollingEnabled="false" />
                     </LinearLayout>
 
                     <androidx.recyclerview.widget.RecyclerView

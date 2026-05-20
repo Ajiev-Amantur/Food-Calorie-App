@@ -103,9 +103,9 @@ class WeightSetupActivtiy : AppCompatActivity() {
         if (isSelectingGoal) {
             userViewModel.saveParams("goal", goalValue)
             isSelectingGoal = false
-            binding.ivSetLessWeight.visibility = View.GONE
-            binding.ivSetMoreWeight.visibility = View.GONE
-            binding.ivSetNormalWeight.visibility = View.GONE
+            binding.image1.visibility = View.GONE
+            binding.image2.visibility = View.GONE
+            binding.Image3.visibility = View.GONE
             updateFrameTexts("Сидячий образ", "Легкая активность", "Высокая активность")
         } else {
             userViewModel.saveParams("activity", activityValue)

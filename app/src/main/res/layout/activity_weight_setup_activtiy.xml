@@ -93,6 +93,7 @@
                     android:textStyle="bold" />
 
                 <ImageView
+                    android:id="@+id/image1"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:src="@drawable/weight_13075946" />
@@ -127,6 +128,7 @@
                     android:textStyle="bold" />
 
                 <ImageView
+                    android:id="@+id/image2"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:src="@drawable/ic_strong_img" />
@@ -160,6 +162,7 @@
                     android:textStyle="bold" />
 
                 <ImageView
+                    android:id="@+id/Image3"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:src="@drawable/health_12426332" />

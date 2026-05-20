@@ -11,7 +11,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.calories.R
-import com.example.calories.data.FoodDataBase
+import com.example.calories.data.dao.FoodDataBase
 import com.example.calories.data.foodMapper.toDomain
 import com.example.calories.data.foodMapper.toDto
 import com.example.calories.databinding.ActivityMainBinding

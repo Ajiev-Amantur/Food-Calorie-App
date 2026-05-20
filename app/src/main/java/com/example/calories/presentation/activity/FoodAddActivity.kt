@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.calories.data.FoodDataBase
+import com.example.calories.data.dao.FoodDataBase
 import com.example.calories.databinding.ActivityFoodAddBinding
 import com.example.calories.domain.model.Food
 import com.example.calories.presentation.FoodViewModel.FoodViewModel

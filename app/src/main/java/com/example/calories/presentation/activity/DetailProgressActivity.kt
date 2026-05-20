@@ -10,7 +10,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import com.example.calories.R
-import com.example.calories.data.FoodDataBase
+import com.example.calories.data.dao.FoodDataBase
 import com.example.calories.databinding.ActivityDetailProgressBinding
 import com.example.calories.presentation.viewModel.UserViewModel
 import com.github.mikephil.charting.components.XAxis
@@ -115,7 +115,7 @@ class DetailProgressActivity : AppCompatActivity() {
 
             val progressNormal = (totalK.toFloat()/kcalNormal.toFloat()) * 100
             binding.progressKcal.progress = progressNormal.toInt()
-                binding.progressKcalMini.progress = progressNormal.toInt()
+              //  binding.progressKcalMini.progress = progressNormal.toInt()
         }
     }
 

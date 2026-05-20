@@ -7,7 +7,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import com.example.calories.R
-import com.example.calories.data.FoodDataBase
+import com.example.calories.data.dao.FoodDataBase
 import com.example.calories.data.cal1
 import com.example.calories.data.carbs
 import com.example.calories.data.fats
